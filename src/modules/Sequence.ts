@@ -214,7 +214,7 @@ export default class Sequence {
     command.push(`-filter_complex_script `)
     command.push('pipe:0 ')
     const quality:string = this.encodingOptions.crf?`-crf ${this.encodingOptions.crf}`:`-b:v ${this.encodingOptions.bitrate}`
-    command.push(`-c:v libx264 ${quality} -preset fast -map [vid] -map [aud] -y "${this.outputVideo.path}"`)
+    command.push(`-c:v libx264 ${quality} -preset fast -movflags +faststart -map [vid] -map [aud] -y "${this.outputVideo.path}"`)
 
     const filter:string[] = []
     filter.push(`${this.sequenceSteps.map(step => step.generateFilter()).join('')}`)
